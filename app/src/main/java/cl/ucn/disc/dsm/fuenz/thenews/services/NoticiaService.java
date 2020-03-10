@@ -65,8 +65,8 @@ public class NoticiaService implements INoticiaService {
         List<Noticia> noticias = new ArrayList<>(noticias1);
         noticias.addAll(noticias2);
 
-        noticias.sort(Comparator.comparing(Noticia::getFecha));
-        Collections.reverse(noticias);
+        //noticias.sort(Comparator.comparing(Noticia::getFecha));
+        //Collections.reverse(noticias);
 
         return noticias;
 
