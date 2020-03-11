@@ -136,4 +136,7 @@ dependencies {
     // https://github.com/OpenHFT/Zero-Allocation-Hashing
     implementation "net.openhft:zero-allocation-hashing:0.10.1"
 
+    // https://mvnrepository.com/artifact/org.ocpsoft.prettytime/prettytime
+    compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.4.Final'
+
 }

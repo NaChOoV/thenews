@@ -6,6 +6,13 @@ package cl.ucn.disc.dsm.fuenz.thenews.activities.adapters;/*
  */
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.ocpsoft.prettytime.PrettyTime;
+import org.threeten.bp.DateTimeUtils;
+import org.threeten.bp.ZonedDateTime;
+
+import java.util.Date;
+
 import cl.ucn.disc.dsm.fuenz.thenews.databinding.RowNoticiaBinding;
 import cl.ucn.disc.dsm.fuenz.thenews.model.Noticia;
 
@@ -14,6 +21,11 @@ public final class NoticiaViewHolder extends RecyclerView.ViewHolder{
      * The Bindings
      */
     private final RowNoticiaBinding binding;
+
+    /**
+     * The Date formatter
+     */
+    private static final PrettyTime PRETTY_TIME = new PrettyTime();
 
     /**
      * The Constructor.
@@ -37,8 +49,8 @@ public final class NoticiaViewHolder extends RecyclerView.ViewHolder{
         this.binding.tvAutor.setText(noticia.getAutor());
         this.binding.tvFuente.setText(noticia.getFuente());
 
-        // FIXME: The format of the date.
-        this.binding.tvFecha.setText(noticia.getFecha().toString());
+        final Date date = DateTimeUtils.toDate(noticia.getFecha().toInstant());
+        this.binding.tvFecha.setText(PRETTY_TIME.format(date));
 
     }
 
