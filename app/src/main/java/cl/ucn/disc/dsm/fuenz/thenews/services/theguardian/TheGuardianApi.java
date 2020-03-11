@@ -30,7 +30,6 @@ public interface TheGuardianApi {
      * @return the call of {@link NewsApiResult}.
      */
     //@Headers({"api-key: " + API_KEY})
-    // TODO: Change the list of sources.section
     @GET("search")
     Call<TheGuardianResult> getContent(
             @Query("api-key") String API_KEY,

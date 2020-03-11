@@ -77,7 +77,6 @@ public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaViewHolder> {
     /**
      * Called when RecyclerView needs a newViewHolder of the given type to represent an item.
      */
-    @NotNull
     @Override
     public NoticiaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 

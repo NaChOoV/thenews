@@ -40,7 +40,6 @@ public interface NewsApi {
      * @return the call of {@link NewsApiResult}.
      */
     @Headers({"X-Api-Key: " + API_KEY})
-    // TODO: Change the list of sources.
     @GET("everything?sources=ars-technica,wired,hacker-news,recode")
     Call<NewsApiResult> getEverything(@Query("pageSize") final int pageSize);
 }

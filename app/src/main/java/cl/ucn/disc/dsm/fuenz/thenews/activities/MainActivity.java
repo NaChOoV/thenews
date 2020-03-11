@@ -3,6 +3,7 @@ package cl.ucn.disc.dsm.fuenz.thenews.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     /**
      * The Adapter
      */
@@ -47,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Assign to the main view.
         setContentView(binding.getRoot());
+
+        // Set the toolbar
+        {
+            this.setSupportActionBar(binding.toolbar);
+        }
+
+        // The refresh
+        {
+            binding.swlRefresh.setOnRefreshListener(() -> {
+                log.debug("Refreshing ..");
+            });
+        }
+
         // The Adapter + RecyclerView
         {
             // The Adapter
@@ -65,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
         // The NoticiaService
         this.noticiaService = new NoticiaService();
 
-        // Set the toolbar
-        {
-            this.setSupportActionBar(binding.toolbar);
-        }
-
         // The refresh
         {
             binding.swlRefresh.setOnRefreshListener(() -> {
@@ -84,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
 
                         // 1. Get the List from NewsApi (in background)
-                        final List<Noticia> noticias = this.noticiaService.getNoticias(20);
+                        final List<Noticia> noticias = this.noticiaService.getNoticias(50);
 
                         // (in UI)
                         this.runOnUiThread(() -> {
@@ -95,7 +105,11 @@ public class MainActivity extends AppCompatActivity {
                             // 3. Show a Toast!
                             Toast.makeText(this, "Done: " + stopWatch, Toast.LENGTH_SHORT).show();
 
+                            binding.swlRefresh.setRefreshing(false);
+
                         });
+
+
 
                     } catch (Exception ex) {
 
@@ -115,24 +129,14 @@ public class MainActivity extends AppCompatActivity {
                             // 3. Show the Toast!
                             Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
 
+                            binding.swlRefresh.setRefreshing(false);
+
                         });
-
-                    } finally {
-
-                        // 4. Hide the spinning circle
-                        binding.swlRefresh.setRefreshing(false);
-
                     }
-
                 });
-
             });
-
         }
 
-        log.debug("Refreshing ..");
-
-        // Execute in background ..
         AsyncTask.execute(() -> {
 
             // How much time do we need?
@@ -141,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             try {
 
                 // 1. Get the List from NewsApi (in background)
-                final List<Noticia> noticias = this.noticiaService.getNoticias(10);
+                final List<Noticia> noticias = this.noticiaService.getNoticias(50);
 
                 // (in UI)
                 this.runOnUiThread(() -> {
@@ -152,7 +156,10 @@ public class MainActivity extends AppCompatActivity {
                     // 3. Show a Toast!
                     Toast.makeText(this, "Done: " + stopWatch, Toast.LENGTH_SHORT).show();
 
+                    binding.swlRefresh.setRefreshing(false);
+
                 });
+
 
             } catch (Exception ex) {
 
@@ -172,11 +179,14 @@ public class MainActivity extends AppCompatActivity {
                     // 3. Show the Toast!
                     Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
 
+                    binding.swlRefresh.setRefreshing(false);
+
                 });
 
             }
 
         });
+
 
     }
 }
