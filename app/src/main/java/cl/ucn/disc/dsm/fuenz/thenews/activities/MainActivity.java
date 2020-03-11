@@ -13,6 +13,7 @@ import cl.ucn.disc.dsm.fuenz.thenews.activities.adapters.NoticiaAdapter;
 import cl.ucn.disc.dsm.fuenz.thenews.databinding.ActivityMainBinding;
 import cl.ucn.disc.dsm.fuenz.thenews.model.Noticia;
 import cl.ucn.disc.dsm.fuenz.thenews.services.NoticiaService;
+import es.dmoral.toasty.Toasty;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             this.noticiaAdapter.setNoticias(noticias);
 
                             // 3. Show a Toast!
-                            Toast.makeText(this, "Done: " + stopWatch, Toast.LENGTH_SHORT).show();
+                            Toasty.success(this, "Done: " + stopWatch, Toast.LENGTH_SHORT, true).show();
 
                             binding.swlRefresh.setRefreshing(false);
 
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             // 3. Show the Toast!
-                            Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
+                            Toasty.error(this, sb.toString(), Toast.LENGTH_LONG, true).show();
 
                             binding.swlRefresh.setRefreshing(false);
 

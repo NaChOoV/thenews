@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.ocpsoft.prettytime.PrettyTime;
 import org.threeten.bp.DateTimeUtils;
-import org.threeten.bp.ZonedDateTime;
 
 import java.util.Date;
 
@@ -51,6 +50,15 @@ public final class NoticiaViewHolder extends RecyclerView.ViewHolder{
 
         final Date date = DateTimeUtils.toDate(noticia.getFecha().toInstant());
         this.binding.tvFecha.setText(PRETTY_TIME.format(date));
+
+        if (noticia.getUrlFoto() != null) {
+            // .. set the uri
+            this.binding.sdvFoto.setImageURI(noticia.getUrlFoto());
+        } else {
+            // .. set a default image
+            this.binding.sdvFoto.setImageURI("https://perfectstart.com.au/wp-content/uploads/2017/08/not-available.jpg");        }
+
+
 
     }
 

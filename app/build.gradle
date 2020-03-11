@@ -137,6 +137,14 @@ dependencies {
     implementation "net.openhft:zero-allocation-hashing:0.10.1"
 
     // https://mvnrepository.com/artifact/org.ocpsoft.prettytime/prettytime
-    compile group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.4.Final'
+    implementation group: 'org.ocpsoft.prettytime', name: 'prettytime', version: '4.0.4.Final'
+
+    // https://github.com/GrenderG/Toasty
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+    // Fresco (Images):
+    def fresco_version = "2.1.0"
+    implementation "com.facebook.fresco:fresco:$fresco_version"
+    implementation "com.facebook.fresco:imagepipeline-okhttp:$fresco_version"
 
 }
