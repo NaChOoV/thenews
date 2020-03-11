@@ -33,5 +33,6 @@ public interface TheGuardianApi {
     @GET("search")
     Call<TheGuardianResult> getContent(
             @Query("api-key") String API_KEY,
-            @Query("page-size") int page_size);
+            @Query("page-size") int page_size,
+            @Query("show-fields") String fields);
 }

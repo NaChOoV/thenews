@@ -56,7 +56,8 @@ public class NoticiaService implements INoticiaService {
         final Call<TheGuardianResult> theGuardianCall = theGuardianNoticiaService.getTheGuardianApi()
                 .getContent(
                         TheGuardianApi.API_KEY,
-                        pageSize);
+                        pageSize,
+                        "standfirst,thumbnail");
         // Process the Call.
 
         List<Noticia> noticias1 = newsApiNoticiaService.getNoticiasFromCall(theNewsApiCall);

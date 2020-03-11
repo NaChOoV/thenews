@@ -7,6 +7,9 @@
 
 package cl.ucn.disc.dsm.fuenz.thenews.services.theguardian;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Result {
     public String id;
     public String sectionid;
@@ -18,5 +21,6 @@ public class Result {
     public boolean isHosted;
     public String pillarld;
     public String pillarName;
+    public Field fields;
 
 }

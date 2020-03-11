@@ -56,6 +56,7 @@ public class ResultNoticiaTransformer implements Transformer.NoticiaTransformer<
         final Long theId = LongHashFunction.xx()
                 .hashChars(result.webTitle + result.webPublicationDate);
 
+        // FIXME: Filtrar todo el html del body
 
         // Se crea la noticia con el builder y se retorna
         return new NoticiaBuilder()
@@ -64,8 +65,8 @@ public class ResultNoticiaTransformer implements Transformer.NoticiaTransformer<
                 .setFuente("TheGuardian")
                 .setAutor("TheGuardian")
                 .setUrl(result.webUrl)
-                .setUrlFoto(null)
-                .setResumen(null)
+                .setUrlFoto(result.fields.thumbnail)
+                .setResumen(result.fields.standfirst)
                 .setContenido(null)
                 .setFecha(publishedAt)
                 .build();
