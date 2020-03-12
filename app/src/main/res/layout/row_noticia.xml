@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+<!--
+  ~ Copyright (c) 2020. This code is purely educational, the rights of use are
+  ~  reserved, the owner of the code is Ignacio Fuenzalida Veas
+  ~  contact ignacio.fuenzalida@alumnos.ucn.cl
+  ~  Do not use in production.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Principal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,58 +22,58 @@
         android:paddingStart="2dp"
         android:paddingTop="2dp"
         android:paddingEnd="4dp"
-        fresco:roundedCornerRadius="5dp" />
+        fresco:roundedCornerRadius="5dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_autor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextSmall"
+        tools:text="@tools:sample/full_names"
+        android:layout_toEndOf="@id/sdv_foto"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_fuente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextSmall"
+        android:textStyle="bold"
+        tools:text="@tools:sample/cities"
+        android:layout_toEndOf="@id/tv_autor"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/tv_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextSmall"
+        tools:text="@tools:sample/date/ddmmyy"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextLarge"
+        android:textStyle="bold"
+        tools:text="@tools:sample/lorem"
+        android:layout_below="@id/tv_autor"
+        android:layout_toEndOf="@id/sdv_foto" />
+
+    <TextView
+        android:id="@+id/tv_resumen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdv_foto"
+        android:textAppearance="@style/TextMedium"
+        tools:text="@tools:sample/lorem"
+        android:layout_toEndOf="@id/sdv_foto"
+        android:layout_below="@id/tv_titulo"/>
 
 
-        <!--- FIXME: Arreglar la separacion entre los textos. -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_autor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextSmall"
-                tools:text="@tools:sample/full_names" />
-
-            <TextView
-                android:id="@+id/tv_fuente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextSmall"
-                android:textStyle="bold"
-                tools:text="@tools:sample/cities" />
-
-            <TextView
-                android:id="@+id/tv_fecha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextSmall"
-                tools:text="@tools:sample/date/ddmmyy" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_titulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextLarge"
-            android:textStyle="bold"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/tv_resumen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextMedium"
-            tools:text="@tools:sample/lorem" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

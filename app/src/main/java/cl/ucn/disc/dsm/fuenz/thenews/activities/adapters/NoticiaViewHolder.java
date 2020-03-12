@@ -56,10 +56,12 @@ public final class NoticiaViewHolder extends RecyclerView.ViewHolder{
             this.binding.sdvFoto.setImageURI(noticia.getUrlFoto());
         } else {
             // .. set a default image
-            this.binding.sdvFoto.setImageURI("https://perfectstart.com.au/wp-content/uploads/2017/08/not-available.jpg");        }
-
-
+            this.binding.sdvFoto.setImageURI("https://perfectstart.com.au/wp-content/uploads/2017/08/not-available.jpg");
+        }
 
     }
+
+
+
 
 }

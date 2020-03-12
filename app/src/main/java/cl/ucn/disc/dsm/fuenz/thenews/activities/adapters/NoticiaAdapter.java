@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
 
 import cl.ucn.disc.dsm.fuenz.thenews.databinding.RowNoticiaBinding;
 import cl.ucn.disc.dsm.fuenz.thenews.model.Noticia;
@@ -101,4 +100,7 @@ public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaViewHolder> {
     public int getItemCount() {
         return this.theNoticias.size();
     }
+
+
+
 }

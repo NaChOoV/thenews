@@ -17,4 +17,5 @@
 
     <color name="toolbarTitleTextColor">@color/g0</color>
     <color name="toolbarSubtitleTextColor">@color/g50</color>
+
 </resources>
