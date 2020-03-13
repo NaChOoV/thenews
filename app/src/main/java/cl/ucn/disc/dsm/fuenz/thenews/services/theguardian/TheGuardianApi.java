@@ -25,9 +25,9 @@ public interface TheGuardianApi {
     String API_KEY = "bc54e73f-0b58-4356-8308-28de89e1dc8d";
 
     /**
-     * https://newsapi.org/docs/endpoints/everything
+     * http://content.guardianapis.com/
      *
-     * @return the call of {@link NewsApiResult}.
+     * @return the call of {@link TheGuardianApi}.
      */
     //@Headers({"api-key: " + API_KEY})
     @GET("search")

@@ -34,12 +34,19 @@ public class TheGuardiaTest {
     @Test  //Testing para recibir las noticas.
     public void testRetrofit() throws IOException {
         log.debug("Obteniendo noticicas");
-        TheGuardianNoticiaService apiNoticias = new TheGuardianNoticiaService();
+        TheGuardianNoticiaService theGuardianNoticiaService = new TheGuardianNoticiaService();
 
-        for(Noticia noticia : apiNoticias.getNoticiasFromCall(null)){
-            log.debug(noticia.getTitulo());
-            log.debug(noticia.getUrl());
-            log.debug(noticia.getFecha().toString());
+        final Call<TheGuardianResult> theGuardianCall = theGuardianNoticiaService.getTheGuardianApi()
+                .getContent(
+                        TheGuardianApi.API_KEY,
+                        20,
+                        "standfirst,thumbnail");
+
+        List<Noticia> noticias = theGuardianNoticiaService.getNoticiasFromCall(theGuardianCall);
+
+        for(Noticia noticia : noticias){
+            log.debug(noticia.getResumen());
+
         }
 
     }
