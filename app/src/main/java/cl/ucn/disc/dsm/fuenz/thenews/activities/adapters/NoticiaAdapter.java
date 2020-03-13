@@ -7,11 +7,16 @@
 
 package cl.ucn.disc.dsm.fuenz.thenews.activities.adapters;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cl.ucn.disc.dsm.fuenz.thenews.databinding.RowNoticiaBinding;
 import cl.ucn.disc.dsm.fuenz.thenews.model.Noticia;
@@ -21,6 +26,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaViewHolder> {
+    /**
+     * The Logger
+     */
+    private static final Logger log = LoggerFactory.getLogger(NoticiaAdapter.class);
+
     /**
      * The List of Noticias.
      */
@@ -79,8 +89,47 @@ public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaViewHolder> {
     @Override
     public NoticiaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+
+        // The inflater
         final LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        return new NoticiaViewHolder(RowNoticiaBinding.inflate(layoutInflater, parent, false));
+
+        // The row of noticia
+        final RowNoticiaBinding rowNoticiaBinding = RowNoticiaBinding.inflate(
+                layoutInflater,
+                parent,
+                false
+        );
+
+        // The NoticiaViewHolder
+        final NoticiaViewHolder noticiaViewHolder = new NoticiaViewHolder(rowNoticiaBinding);
+        // Click in the row
+        rowNoticiaBinding.getRoot().setOnClickListener(view -> {
+
+            // The position
+            final int position = noticiaViewHolder.getAdapterPosition();
+
+            // The id
+            final long id = noticiaViewHolder.getItemId();
+            log.debug("Click! position: {}, id: {}.", position, Long.toHexString(id));
+
+            // Noticia to show
+            final Noticia noticia = this.theNoticias.get(position);
+
+            log.debug("Link: {}.", noticia.getUrl());
+            if (noticia.getUrl() != null) {
+
+                // Open the browser
+                parent.getContext().startActivity(
+                        new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse(noticia.getUrl())
+                        )
+                );
+            }
+
+        });
+
+        return noticiaViewHolder;
 
     }
 

@@ -64,9 +64,8 @@ public class ResultNoticiaTransformer implements Transformer.NoticiaTransformer<
                 .hashChars(result.webTitle + result.webPublicationDate);
 
 
-        //En caso de que el html tenga <p> obtenemos el contenido dentro de ese tag html
+        // Se eliminara la mayor cantidad  de tags HTML que contenda el body
         String resumen = result.fields.standfirst;
-
         if(resumen != null){
             if(resumen.contains("<p>")){
                 resumen = StringUtils.substringBetween(resumen,
@@ -77,10 +76,7 @@ public class ResultNoticiaTransformer implements Transformer.NoticiaTransformer<
                 int pos1 = resumen.indexOf("<li>");
                 int pos2 = resumen.indexOf("</li>");
                 resumen = resumen.substring(pos1 + 4 ,pos2);
-
-
             }
-
             if(resumen.contains("<br>"))
                 resumen = resumen.replace("<br>","");
             if(resumen.contains("<strong>"))
