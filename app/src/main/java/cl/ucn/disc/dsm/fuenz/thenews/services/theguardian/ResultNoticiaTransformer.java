@@ -9,6 +9,7 @@ package cl.ucn.disc.dsm.fuenz.thenews.services.theguardian;
 
 import net.openhft.hashing.LongHashFunction;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
@@ -37,10 +38,16 @@ public class ResultNoticiaTransformer implements Transformer.NoticiaTransformer<
             throw new Transformer.NoticiaTransformerException("Title or date NULL");
         }
 
-        //Verificamos la existencia de la url
-        if(result.webUrl == null){
-            throw new Transformer.NoticiaTransformerException("WebURL Null");
+        /* Verificamos la existancia de los parametros de la URLfoto y el resumen, en caso de que
+        no exista se reempalzaran por unos predeterminados
+         */
+        if(result.fields == null){
+            result.fields = new Field();
+            result.fields.thumbnail = null;
+            result.fields.standfirst = "(*) Not avaliable content.";
         }
+
+
 
         //Se verifica la fecha de la publicacion y se corrije dependiendo de la zona
         ZonedDateTime publishedAt;
@@ -56,17 +63,41 @@ public class ResultNoticiaTransformer implements Transformer.NoticiaTransformer<
         final Long theId = LongHashFunction.xx()
                 .hashChars(result.webTitle + result.webPublicationDate);
 
-        // FIXME: Filtrar todo el html del body
+
+        //En caso de que el html tenga <p> obtenemos el contenido dentro de ese tag html
+        String resumen = result.fields.standfirst;
+
+        if(resumen != null){
+            if(resumen.contains("<p>")){
+                resumen = StringUtils.substringBetween(resumen,
+                        "<p>", "</p>");
+                // En algunos casos puede traer un tag <br>, se debe eliminar
+
+            }else if (resumen.contains("<li>")){
+                int pos1 = resumen.indexOf("<li>");
+                int pos2 = resumen.indexOf("</li>");
+                resumen = resumen.substring(pos1 + 4 ,pos2);
+
+
+            }
+
+            if(resumen.contains("<br>"))
+                resumen = resumen.replace("<br>","");
+            if(resumen.contains("<strong>"))
+                resumen = resumen.replace("<strong>","");
+        }
+
+
 
         // Se crea la noticia con el builder y se retorna
         return new NoticiaBuilder()
                 .setId(theId)
                 .setTitulo(result.webTitle)
-                .setFuente("TheGuardian")
-                .setAutor("TheGuardian")
+                .setFuente("@TheGuardian")
+                .setAutor("theGuardian")
                 .setUrl(result.webUrl)
                 .setUrlFoto(result.fields.thumbnail)
-                .setResumen(result.fields.standfirst)
+                .setResumen(resumen)
                 .setContenido(null)
                 .setFecha(publishedAt)
                 .build();
